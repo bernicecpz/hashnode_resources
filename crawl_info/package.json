@@ -9,6 +9,7 @@
   "author": "bcpz",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
     "jsdom": "^19.0.0"
   }
 }
