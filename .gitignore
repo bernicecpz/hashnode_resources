@@ -1,3 +1,5 @@
 **/cookie.txt
 node_modules
 **/node_modules
+rfas.json
+.DS_Store

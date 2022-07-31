@@ -17,6 +17,7 @@ let sortByMethod = 'popular'
 
 // Global enable of verbose logs
 isEnabled = true;
+adHocDisabled = false;
 
 const verboseLogs = (prefixMsg, data, isEnabled) => {
     if(isEnabled) {
@@ -39,17 +40,30 @@ const recursionFunc = (pageCounter => {
 
         let jsonObj = response.data;
         
-        verboseLogs('CONFIG URL: ', config.url, isEnabled);        
+        verboseLogs('CONFIG URL: ', config.url, true);        
         
         if (jsonObj.posts.length !== 0) {
 
             for (let item of jsonObj.posts) {
+
+                postsArr = [];
+                for (let submittedPostItem of item.submittedPosts) {
+                    let postItem = {
+                        'title': submittedPostItem.title,
+                        'totalReactions': submittedPostItem.totalReactions,
+                        'slug': submittedPostItem.slug
+                    }
+                    verboseLogs('CURRENT POST: ', JSON.stringify(postItem), true); 
+                    postsArr.push(postItem);
+                }
     
                 let newItem = {
                     'title': item.content.replace(/\r?\n|\r/g, " "),
-                    'upvote': item.numLikes
+                    'upvote': item.numLikes,
+                    'submittedPostCount': item.submittedPosts.length,
+                    'submittedPosts': postsArr
                 }
-                verboseLogs('CURRENT ITEM: ', JSON.stringify(newItem), isEnabled); 
+                verboseLogs('CURRENT ITEM: ', JSON.stringify(newItem), false); 
                 arr.push(newItem);
             }
         }
@@ -57,7 +71,7 @@ const recursionFunc = (pageCounter => {
         return jsonObj.posts.length;
 
     }).then((postLength) => {
-        verboseLogs('CURRENT POST LENGTH: ', postLength, isEnabled);
+        verboseLogs('CURRENT POST LENGTH: ', postLength, false);
         
         if (postLength == 0) {
             fs.unlinkSync('rfas.json');
