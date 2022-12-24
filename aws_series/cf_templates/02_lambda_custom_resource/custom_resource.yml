@@ -1,0 +1,7 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "This templates is to create a Lambda-backed Custom Resource"
+
+Parameters:
+
+Resources:
+
