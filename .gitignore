@@ -3,3 +3,10 @@
 **/*.zip
 .DS_Store
 **/.DS_Store
+**/**/node_modules/
+**/node_modules/
+node_modules/
+**/**/test.js
+**/**/cookie.txt
+**/**/*-test.js
+tinker/rocketchat_integration/samples/
