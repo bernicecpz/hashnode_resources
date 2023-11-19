@@ -1,0 +1,17 @@
+{
+  "name": "scrapping_info",
+  "version": "1.0.0",
+  "description": "Get RFA content & attached articles' tags",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "extract": "node index.js"
+  },
+  "author": "Bernice Choy",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "json2csv": "^6.0.0-alpha.2",
+    "winston": "^3.11.0"
+  }
+}
