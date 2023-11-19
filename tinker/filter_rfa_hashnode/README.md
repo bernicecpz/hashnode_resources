@@ -18,20 +18,38 @@
 ```shell
 # Create a directory to store the source code, in this example, the hashnode_rfa folder is created
 mkdir "hashnode_rfa"
-git clone "https://github.com/bernicecpz/hashnode_resources.git" --no-checkout ../hashnode_rfa
-
-# Fetch only root files/folder
-git sparse-checkout init --cone
+git clone --sparse --no-checkout --depth=1 "https://github.com/bernicecpz/hashnode_resources.git"  ../hashnode_rfa
 
 # To list the sub-folders to checkout
-git sparse-checkout set tinker/filter_rfa_hashnode
+git sparse-checkout add tinker/filter_rfa_hashnode/
 
 # Checkout the code
 git checkout
+
+# You should be able to see the following folder structure
+.
+├── LICENSE
+├── README.md
+└── tinker
+    └── filter_rfa_hashnode
+        ├── README.md
+        ├── common.js
+        ├── index.js
+        ├── log.js
+        ├── package-lock.json
+        ├── package.json
+        └── sample-outputs
+            ├── ideas.json
+            └── tags.json
 ```
 
 2. Install the NPM packages
-`npm install`
+```shell
+# Navigate to the target folder
+cd /path/to/tinker/filter_rfa_hashnode
+npm install
+```
+
 
 3. Create a file named `cookie.txt`. Retrieve your Hashnode Session Cookie by following the steps below:
 - Open the Developer Console
