@@ -8,5 +8,8 @@
 node_modules/
 **/**/test.js
 **/**/cookie.txt
+**/cookie.txt
+cookie.txt
 **/**/*-test.js
 tinker/rocketchat_integration/samples/
+tinker/filter_rfa_hashnode/outputs/
