@@ -13,3 +13,4 @@ cookie.txt
 **/**/*-test.js
 tinker/rocketchat_integration/samples/
 tinker/filter_rfa_hashnode/outputs/
+tinker/**/*.log
