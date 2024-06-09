@@ -278,7 +278,88 @@ Resources:
                 cacheNamespace: "lt8t5k"
                 cacheKeyParameters:
                 - "method.request.path.subfolder"
+                - "method.request.path.fe-target"
                 type: "aws"
+          /{fe-target}/static/{subfolder+}:
+            get:
+              parameters:
+              - name: "subfolder"
+                in: "path"
+                required: true
+                type: "string"
+              - name: "fe-target"
+                in: "path"
+                required: true
+                type: "string"
+              responses:
+                "200":
+                  description: "200 response"
+                  headers:
+                    X-Frame-Options:
+                      type: "string"
+                    Strict-Transport-Security:
+                      type: "string"
+                    Cache-Control:
+                      type: "string"
+                    Content-Length:
+                      type: "string"
+                    Timestamp:
+                      type: "string"
+                    Content-Type:
+                      type: "string"
+                "400":
+                  description: "400 response"
+                "500":
+                  description: "500 response"
+                "404":
+                  description: "404 response"
+              x-amazon-apigateway-integration:
+                credentials: !Sub "arn:aws:iam::${AWS::AccountId}:role/${RoleName}"
+                httpMethod: "GET"
+                uri: 
+                  !Join
+                    - ""
+                    - - "arn:aws:apigateway:ap-southeast-1:s3:path/"
+                      - !Ref WebName
+                      - "-"
+                      - !Ref Environment
+                      - "-"
+                      - !Sub ${AWS::AccountId}
+                      - "/{fe-target}/static/{subfolder}"
+                responses:
+                  "4\\d{2}":
+                    statusCode: "400"
+                    responseTemplates:
+                      text/plain: "#set($inputRoot = $input.path('$'))\n404 Error: Bad Request"
+                  "404":
+                    statusCode: "404"
+                    responseTemplates:
+                      text/plain: "#set($inputRoot = $input.path('$'))\n404 Error: Page not\
+                        \ found"
+                  "5\\d{2}":
+                    statusCode: "500"
+                    responseTemplates:
+                      text/plain: "#set($inputRoot = $input.path('$'))\r\n500 Error: Internal\
+                        \ Server Error"
+                  "2\\d{2}":
+                    statusCode: "200"
+                    responseParameters:
+                      method.response.header.Cache-Control: "'private, max-age=900'"
+                      method.response.header.X-Frame-Options: "'deny'"
+                      method.response.header.Content-Type: "integration.response.header.Content-Type"
+                      method.response.header.Strict-Transport-Security: "'max-age=31536000\
+                        \ ; includeSubDomains'"
+                      method.response.header.Content-Length: "integration.response.header.Content-Length"
+                      method.response.header.Timestamp: "integration.response.header.Date"
+                requestParameters:
+                  integration.request.path.subfolder: "method.request.path.subfolder"
+                  integration.request.path.fe-target: "method.request.path.fe-target"
+                passthroughBehavior: "when_no_match"
+                cacheNamespace: "lt8t5k"
+                cacheKeyParameters:
+                - "method.request.path.subfolder"
+                - "method.request.path.fe-target"
+                type: "aws"                
         x-amazon-apigateway-binary-media-types:
         - "image/*"
         - "font/ttf"
