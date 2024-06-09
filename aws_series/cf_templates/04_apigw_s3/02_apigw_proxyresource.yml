@@ -200,7 +200,7 @@ Resources:
                 cacheKeyParameters:
                 - "method.request.path.fe-target"
                 type: "aws"
-          /{fe-target}/static/{subfolder+}:
+          /static/{subfolder+}:
             get:
               parameters:
               - name: "subfolder"
