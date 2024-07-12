@@ -31,6 +31,7 @@ Parameters:
   VpcId:
     Type: AWS::EC2::VPC::Id
     Description: Select the target VPC for VPC endpoint to reside in
+    AllowedPattern: "^.*$"
   RoleName:
     Type: String
     Default: apigateway-to-s3-role
@@ -38,6 +39,7 @@ Parameters:
   SubnetIds:
     Type: List<AWS::EC2::Subnet::Id>
     Description: List of subnets ID to use for API Gateway VPC endpoint
+    AllowedPattern: "^.*$"
 
 Resources:
   # S3 Bucket to host the Single Page Application Content
