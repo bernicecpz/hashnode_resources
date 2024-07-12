@@ -113,6 +113,9 @@ Resources:
     Type: AWS::ApiGateway::RestApi
     Properties:
       Description: !Ref ApiDescription
+      EndpointConfiguration:
+        Types:
+          - REGIONAL
       BinaryMediaTypes:
         - font~1ttf
         - binary~1octet-stream
