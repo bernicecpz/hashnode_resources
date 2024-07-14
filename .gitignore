@@ -14,3 +14,6 @@ cookie.txt
 tinker/rocketchat_integration/samples/
 tinker/filter_rfa_hashnode/outputs/
 tinker/**/*.log
+**/.terraform/
+**/.terraform.lock.hcl
+**/terraform.tfstate*
