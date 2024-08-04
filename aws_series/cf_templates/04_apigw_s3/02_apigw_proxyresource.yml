@@ -183,21 +183,18 @@ Resources:
                   "404":
                     statusCode: "404"
                     responseTemplates:
-                      text/plain: "#set($inputRoot = $input.path('$'))\n404 Error: Page not\
-                        \ found"
+                      text/plain: "#set($inputRoot = $input.path('$'))\n404 Error: Page not found"
                   "5\\d{2}":
                     statusCode: "500"
                     responseTemplates:
-                      text/plain: "#set($inputRoot = $input.path('$'))\r\n500 Error: Internal\
-                        \ Server Error"
+                      text/plain: "#set($inputRoot = $input.path('$'))\r\n500 Error: Internal Server Error"
                   "2\\d{2}":
                     statusCode: "200"
                     responseParameters:
                       method.response.header.Cache-Control: "'private, max-age=900'"
                       method.response.header.X-Frame-Options: "'deny'"
                       method.response.header.Content-Type: "integration.response.header.Content-Type"
-                      method.response.header.Strict-Transport-Security: "'max-age=31536000\
-                        \ ; includeSubDomains'"
+                      method.response.header.Strict-Transport-Security: "'max-age=31536000; includeSubDomains'"
                       method.response.header.Content-Length: "integration.response.header.Content-Length"
                       method.response.header.Timestamp: "integration.response.header.Date"
                 requestParameters:
